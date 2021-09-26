@@ -27,7 +27,7 @@
               {{ item.author }}
             </td>
             <td>
-              {{ item.content | safe | urlizetrunc:5 | truncatechars_html:50 }}
+              {{ item.content |striptags| truncatechars:50 }}
             </td>
             <td>{{ item.created_at | date:"Y-m-j H:i:s" }}/<br>{{ item.updated_at | date:"Y-m-j H:i:s" }}</td>
           </tr>

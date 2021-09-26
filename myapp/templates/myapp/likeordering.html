@@ -11,7 +11,7 @@
   <a href="{% url 'myapp:indexlike' %}">人気の投稿を表示</a>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-4">
+<div class="row row-cols-1 row-cols-lg-3 row-cols-xl-4 g-4">
 {% for item in post_list %}
   <div class="col">
     <div class="card h-100">
@@ -50,13 +50,14 @@
         <hr>
         <p class="fs-10 fw-normal">{{ item.category }}</p>
         <p class="card-text">
-          {{ item.content | safe | urlizetrunc:5 | truncatechars_html:30 }}
+          {{ item.content |striptags| truncatechars:40 }}
         </p>
       </div>
       <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn">Read more</a>
       <div class="card-footer">
+        <small class="text-muted d-block text-center">文字数 : {{ item.content | wordcount }}</small>
+        <small class="text-muted d-block text-center">投稿者 : {{ item.author }}</small>
         <small class="text-muted d-block text-center">更新日：{{ item.updated_at | date:"Y-m-j H:i" }}</small>
-        <small class="text-muted d-block text-center">author : {{ item.author }}</small>
       </div>
     </div>
   </div>

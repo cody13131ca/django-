@@ -17,10 +17,23 @@
       />
     {% endif %}
     <div class="card-body">
-      <h5 class="card-title">{{ object.title}}</h5>
+      <div class="row">
+      <div class="col-xl-7 col-12">
+        <h5 class="card-title p-3">{{ object.title}}</h5>
+      </div>
+      <div class="col-xl-5">
+        <div class="d-flex align-items-center h-100">
+          <small class="text-muted d-block text-center p-1">投稿者 : {{ object.author }}</small>
+          <small class="text-muted d-block text-center p-1">更新日：{{ object.updated_at | date:"Y-m-j H:i" }}</small>  
+        </div>
+      </div>
+      
+      </div>
+      <hr>
       <p class="card-text">
-        {{ object.content | safe | linebreaksbr | urlize }}
+        {{ object.content | safe }}
       </p>
+    <div class="card-footer">
       <div class="d-flex justify-content-center m-3">
           <a href="{% url 'myapp:like_add' object.pk %}" style="margin: 0 .25em" class="p-2">
             Like:<i class="far fa-thumbs-up" style="padding: 0 .5em;"></i>{{ object.like_count }}
@@ -37,9 +50,8 @@
         {% endif %}
       </div>
     </div>
-    <div class="card-footer">
-        <small class="text-muted d-block text-center">更新日時：{{ object.updated_at }}</small>
-      </div>
+
+    </div>
   </div>
 </div>
 <div class="col-md-3">

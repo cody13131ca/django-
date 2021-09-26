@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -21,7 +22,7 @@ class Category(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.PROTECT, blank=False)
     title = models.CharField('タイトル', max_length=50)
-    content = models.TextField('内容', max_length=1000)
+    content = RichTextUploadingField('内容', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     thumbnail = models.ImageField(upload_to='images/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
