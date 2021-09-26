@@ -55,7 +55,7 @@
       </div>
       <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn">Read more</a>
       <div class="card-footer">
-        <small class="text-muted d-block text-center">文字数 : {{ item.content | wordcount }}</small>
+        <small class="text-muted d-block text-center">文字数 : {{ item.content|striptags | length }}</small>
         <small class="text-muted d-block text-center">投稿者 : {{ item.author }}</small>
         <small class="text-muted d-block text-center">更新日：{{ item.updated_at | date:"Y-m-j H:i" }}</small>
       </div>
