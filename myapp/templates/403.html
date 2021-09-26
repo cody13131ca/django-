@@ -1,0 +1,19 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-9">
+    <h1 class="mb-5">403/ アクセス制限エラー</h1>
+    <h4>権限がありません。</h4>
+    <ul>
+      <li>許可されていないIPからのアクセス</li>
+      <li>管理者よる制限がなされている</li>
+      <li>サーバエラー/メンテナンス</li>
+      <li>その他エラー</li>
+    </ul>
+    <p>の可能性があります。</p>
+  </div>
+</div>
+
+
+{% endblock %}
+

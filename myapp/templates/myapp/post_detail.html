@@ -1,0 +1,68 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="row mt-3 mb-5">
+<div class="col-md-9">
+  <div class="card">
+    {% if object.thumbnail %}
+      <img
+        src="{{ object.thumbnail.url }}"
+        class="card-img-top"
+        alt="{{ object.title }}"
+      />
+    {% else %}
+      <img
+        src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
+        class="card-img-top"
+        alt="{{ object.title }}"
+      />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ object.title}}</h5>
+      <p class="card-text">
+        {{ object.content | safe | linebreaksbr | urlize }}
+      </p>
+      <div class="d-flex justify-content-center m-3">
+          <a href="{% url 'myapp:like_add' object.pk %}" style="margin: 0 .25em" class="p-2">
+            Like:<i class="far fa-thumbs-up" style="padding: 0 .5em;"></i>{{ object.like_count }}
+          </a>
+          <a href="{% url 'myapp:dislike_add' object.pk %}" style="margin: 0 .25em" class="p-2">
+            Dislike:<i class="far fa-thumbs-down" style="padding: 0 .5em;"></i>{{ object.dislike_count }}
+          </a>
+        </div>
+      <div class="d-flex align-items-center justify-content-center">
+        <a href="{% url 'myapp:index' %}" class="btn btn-outline-dark m-2">ホームへ</a>
+        {% if object.author == request.user %}
+          <a href="{% url 'myapp:post_update' object.pk %}" class="btn btn-dark m-2">更新</a>
+          <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-danger m-2" >削除</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted d-block text-center">更新日時：{{ object.updated_at }}</small>
+      </div>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="card">
+    <div class="card-body">
+    {% for i in category_list %}
+    <a href="{% url 'myapp:category_detail' i.name_en %}">
+    {% endfor %}
+      <h5 class="card-title mb-3">{{ object.category }}</h5>
+    </a>
+      <p class="fs-6">このカテゴリーの他の記事</p>
+      <ul class="list-group list-group-flush">
+        {% for item in category_posts|slice:":10" %}
+          <li class="list-group-item">
+            <a href="{% url 'myapp:post_detail' item.id %}">{{ item.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="d-flex align-items-center justify-content-center m-3">
+        <a class="btn btn-outline-dark" href="{% url 'myapp:category_list' %}">全てのカテゴリを見る</a>
+      </div>
+  </div>
+</div>
+</div>
+{% endblock %}

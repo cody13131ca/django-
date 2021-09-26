@@ -1,0 +1,50 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <h2>検索結果一覧</h2>
+    <div class="table-responsive">
+      <table class="table mb-3">
+        <thead>
+          <tr>
+            <th width="250px">タイトル</th>
+            <th width="100px">投稿者</th>
+            <th width="400px">内容</th>
+            <th width="200px">作成日時/更新日時</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in search_list %}
+          <tr>
+            <td>
+              <a href="{% url 'myapp:post_detail' item.pk %}" class="text-body font-weight-bold">
+              
+                {{ item.title }}
+              
+              </a>
+            </td>
+            <td>   
+              {{ item.author }}
+            </td>
+            
+            <td>
+              {{ item.content | safe | urlizetrunc:5 | truncatechars_html:30 }}
+            </td>
+            <td>
+              {{ item.created_at | date:"Y-m-j H:i:s" }}
+            /<br>
+              {{ item.updated_at | date:"Y-m-j H:i:s" }}
+            </td>
+          </tr>
+          {% empty %}
+          <p>検索結果にあう投稿はありません。</p>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

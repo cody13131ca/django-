@@ -1,0 +1,41 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="row">
+  <div class="mb-3">
+    <h2 class="mb-3">Category List</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+    {% for category in category_list %}
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <a href="{% url 'myapp:category_detail' category.name_en %}"  class="card-title pt-3 fs-4 d-inline-block">
+            <h5>
+              {{ category.name }}
+            </h5>
+          </a>
+          <small style="margin-left: 1em;">件数：[&nbsp;{{ category.post_count }}&nbsp;]</small>
+          <ul>
+            {% for post in category.post_set.all|slice:":10" %}
+            <li>
+              <a href="{% url 'myapp:post_detail' post.id %}"  class="pt-1 pb-1 m-3 fs-10  d-block card-text">
+                {{ post.title }}
+              </a>
+            </li>
+            {% empty %}
+              <li>
+                <p>このカテゴリに属する記事は投稿されていません。</p>
+              </li>
+            {% endfor %}
+          </ul>
+          <a href="{% url 'myapp:category_detail' category.name_en %}">→このカテゴリーの記事を全て見る</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

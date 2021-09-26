@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>{{ request.site.siteconfig.meta_title }}</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <style>
+      a{
+        color: #111;
+      }
+      h2 {
+        padding: .5rem 1.5rem;
+        border-left: 2px dotted #000;
+      }
+      h5:first-letter{
+        font-size: 150%;
+        color: #eb6100;
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'myapp:index' %}">{{ request.site.siteconfig.top_title }}</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'myapp:index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/admin" target="_blank">管理画面へ</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="account"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Account
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="account"
+              >
+                {% if request.user.is_authenticated %}
+                  <li>
+                    <a class="dropdown-item" href="">{{ request.user }}</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'myapp:logout' %}">ログアウト</a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'myapp:login' %}">ログイン</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'myapp:signup' %}">ユーザー登録</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Post
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" href="{% url 'myapp:post_create' %}">新規投稿</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'myapp:post_list' %}">投稿一覧</a>
+                </li>
+              </ul>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Category
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                {% for item in category_list|slice:":5" %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'myapp:category_detail' item.name_en %}">{{ item.name }}</a>
+                  </li>
+                {% endfor %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'myapp:category_list' %}">全てのカテゴリ</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex input-group w-auto" action="{% url 'myapp:search' %}" method="POST">
+          {% csrf_token %}
+            <input
+              type="search"
+              class="form-control"
+              placeholder="記事を検索"
+              aria-label="Search" 
+              name="freeword"
+            />
+            <button
+              class="btn btn-outline-dark my-2 my-sm-0"
+              type="submit"
+              data-mdb-ripple-color="dark"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Start your project here-->
+    <main class="container mt-5 pt-5">
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endif %}
+      {% comment %} ↑更新時のメッセージ {% endcomment %}
+      {% block content %} 
+      {% endblock %}
+    </main>
+    <!-- End your project here-->
+    <!-- footer -->
+    <footer class="text-center text-lg-start bg-light text-muted ">
+      <!-- Section: Social media -->
+      <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+      >
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold mb-4">
+                {{ request.site.siteconfig.top_title }}
+              </h6>
+              <p>
+                {{ request.site.siteconfig.top_subtitle }}
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+              <p>
+                <a href="{% url 'myapp:index' %}" class="text-reset">Home</a>
+              </p>
+              {% if request.user.is_authenticated %}
+              <p>
+                <a href="{% url 'myapp:logout' %}" class="text-reset">Logout</a>
+              </p>
+              {% else %}
+              <p>
+                <a href="{% url 'myapp:login' %}" class="text-reset">Login</a>
+              </p>
+              <p>
+                <a href="{% url 'myapp:signup' %}" class="text-reset">Signup</a>
+              </p>
+              {% endif %}
+              <p>
+                <a href="{% url 'myapp:post_list' %}" class="text-reset">Post</a>
+              </p>
+              <p>
+                <a href="{% url 'myapp:category_list' %}" class="text-reset">Category</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+              <p>
+              <a href="" class="me-4 text-reset">
+                <i class="fab fa-twitter  me-3"></i>twittter
+              </a>
+              </p>
+              <p>
+                <i class="fas fa-envelope me-3"></i>
+                {{ request.site.siteconfig.mail }}
+              </p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        © 2021 Copyright:
+        <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
+          >{{ request.site.siteconfig.author }}</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+    ></script>
+  </body>
+</html>

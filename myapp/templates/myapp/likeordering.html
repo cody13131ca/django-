@@ -1,0 +1,66 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">{{ request.site.siteconfig.top_title }}</h1>
+    <p class="lead">{{ request.site.siteconfig.top_subtitle }}</p>
+  </div>
+</div>
+<div class="change">
+  <a href="{% url 'myapp:index' %}">新しい投稿を表示</a>
+  <a href="{% url 'myapp:indexlike' %}">人気の投稿を表示</a>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-4">
+{% for item in post_list %}
+  <div class="col">
+    <div class="card h-100">
+      <div style="width: 100%; height:250px;">
+      <a href="{% url 'myapp:post_detail' item.id %}">
+        {% if item.thumbnail %}
+          <img
+            src="{{ item.thumbnail.url }}"
+            class="card-img-top w-100 h-100"
+            alt="{{ item.title }}" 
+            style="object-fit: cover;"
+          />
+        {% else %}
+          <img
+            src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
+            class="card-img-top w-100 h-100"
+            alt="{{ item.title }}" 
+            style="object-fit:cover;"
+          />
+        {% endif %}
+      
+      </a>
+      
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">{{ item.title }}
+        </h4>
+        <div class="d-flex justify-content-center">
+          <a href="{% url 'myapp:like_add' item.pk %}" style="margin: 0 .25em">
+            Like:<i class="fas fa-heart" style="color: pink; padding: 0 .5em;"></i>{{ item.like_count }}
+          </a>
+          <a href="{% url 'myapp:dislike_add' item.pk %}" style="margin: 0 .25em">
+            Dislike:<i class="fas fa-heart" style="color: blue; padding: 0 .5em;"></i>{{ item.dislike_count }}
+          </a>
+        </div>
+        <hr>
+        <p class="fs-10 fw-normal">{{ item.category }}</p>
+        <p class="card-text">
+          {{ item.content | safe | urlizetrunc:5 | truncatechars_html:30 }}
+        </p>
+      </div>
+      <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn">Read more</a>
+      <div class="card-footer">
+        <small class="text-muted d-block text-center">更新日：{{ item.updated_at | date:"Y-m-j H:i" }}</small>
+        <small class="text-muted d-block text-center">author : {{ item.author }}</small>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+{% endblock %}
