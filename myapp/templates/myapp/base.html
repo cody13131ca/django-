@@ -145,7 +145,7 @@
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                {% for item in category_list|slice:":5" %}
+                {% for item in category_list %}
                   <li>
                     <a class="dropdown-item" href="{% url 'myapp:category_detail' item.name_en %}">{{ item.name }}</a>
                   </li>
@@ -166,7 +166,7 @@
               name="freeword"
             />
             <button
-              class="btn btn-outline-dark my-2 my-sm-0"
+              class="btn btn-outline-primary my-0"
               type="submit"
               data-mdb-ripple-color="dark"
             >

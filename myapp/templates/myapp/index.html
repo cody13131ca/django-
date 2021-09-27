@@ -52,8 +52,12 @@
             >{{ item.dislike_count }}
           </a>
         </div>
-        <hr />
-        <p class="fs-10 fw-normal">{{ item.category }}</p>
+        <hr>
+
+        <p class="fs-10 fw-normal">
+          分類：{{ item.category }}
+        </p>
+
         <p class="card-text">{{ item.content |striptags| truncatechars:40 }}</p>
       </div>
       <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn"
