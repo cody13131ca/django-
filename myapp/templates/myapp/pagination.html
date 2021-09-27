@@ -1,22 +1,4 @@
 <div class="pagination d-flex align-items-center justify-content-center m-3 flex-column">
-  {% comment %} <span class="step-links">
-    {% if page_obj.has_previous %}
-    <a href="?page=1" class="p-2" class="p-1 mx-5">&laquo; 最初のページへ</a>
-    <a href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-angle-double-left bg-black p-2 fs-4 text-light rounded-circle"></i></a
-    >
-    {% endif %}
-    <span class="current p-2 mx-3">
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-    </span>
-
-    {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}" ><i class="fas fa-angle-double-right bg-black p-2 fs-4 text-light rounded-circle"></i></a>
-    <a href="?page={{ page_obj.paginator.num_pages }}" class="p-1 mx-5"
-      >最後のページへ &raquo;</a
-    >
-    {% endif %}
-  </span> {% endcomment %}
-
 {% if is_paginated %}
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">

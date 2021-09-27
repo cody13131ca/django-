@@ -41,7 +41,7 @@
             </div>
             <hr>
             <p class="card-text">
-              {{ item.content | safe | urlizetrunc:5 | truncatechars_html:30 }}
+              {{ item.content |striptags| truncatechars:40 }}
             </p>
           </div>
           <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn">Read more</a>

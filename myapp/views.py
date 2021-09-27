@@ -67,6 +67,7 @@ class PostDetail(DetailView):
         detail_data = Post.objects.get(id=self.kwargs['pk'])
         category_posts = Post.objects.filter(
             category=detail_data.category).order_by('-created_at')
+        
         params = {
             'object': detail_data,
             'category_posts': category_posts,
