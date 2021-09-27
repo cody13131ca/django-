@@ -35,20 +35,43 @@
       </p>
     <div class="card-footer">
       <div class="d-flex justify-content-center m-3">
-          <a href="{% url 'myapp:like_add' object.pk %}" style="margin: 0 .25em" class="p-2">
-            Like:<i class="far fa-thumbs-up" style="padding: 0 .5em;"></i>{{ object.like_count }}
-          </a>
-          <a href="{% url 'myapp:dislike_add' object.pk %}" style="margin: 0 .25em" class="p-2">
-            Dislike:<i class="far fa-thumbs-down" style="padding: 0 .5em;"></i>{{ object.dislike_count }}
-          </a>
-        </div>
-      <div class="d-flex align-items-center justify-content-center">
-        <a href="{% url 'myapp:index' %}" class="btn btn-outline-dark m-2">ホームへ</a>
-        {% if object.author == request.user %}
-          <a href="{% url 'myapp:post_update' object.pk %}" class="btn btn-dark m-2">更新</a>
-          <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-danger m-2" >削除</a>
-        {% endif %}
+        <a href="{% url 'myapp:like_add' object.pk %}" style="margin: 0 .25em" class="p-2">
+          Like:<i class="far fa-thumbs-up" style="padding: 0 .5em;"></i>{{ object.like_count }}
+        </a>
+        <a href="{% url 'myapp:dislike_add' object.pk %}" style="margin: 0 .25em" class="p-2">
+          Dislike:<i class="far fa-thumbs-down" style="padding: 0 .5em;"></i>{{ object.dislike_count }}
+        </a>
       </div>
+      <div class="d-flex align-items-center justify-content-center flex-column">
+        <a href="{% url 'myapp:index' %}" class="btn btn-outline-dark m-4">ホームへ</a>
+        <div class="d-flex align-items-center justify-content-center flex-wrap">
+          {% if object.author == request.user %}
+            <a href="{% url 'myapp:post_update' object.pk %}" class="btn btn-dark m-2">更新</a>
+            <a href="{% url 'myapp:post_delete' object.pk %}" class="btn btn-danger m-2" >削除</a>
+          {% endif %}
+        
+        </div>
+      </div>
+    </div>
+    <div class="d-flex w-100 justify-content-between flex-wrap">
+      <p class="p-2">
+      {% with prev=object.get_previous_by_pk %}
+        {% if prev %}
+          
+          <a href="{% url 'myapp:post_detail' prev.pk %}"><i class="fas fa-angle-double-left px-2"></i>{{ prev.title }}</a>
+        {% endif %}
+      {% endwith %}
+      </p>
+
+      <p class="p-2 d-inline-block w-100" style="text-align: end;">
+     
+      {% with next=object.get_next_by_pk %}
+        {% if next %}
+          
+          <a href="{% url 'myapp:post_detail' next.pk %}">{{ next.title }}<i class="fas fa-angle-double-right px-2"></i></a>
+        {% endif %}
+      {% endwith %}
+      </p>
     </div>
 
     </div>
