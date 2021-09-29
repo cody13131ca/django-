@@ -1,18 +1,7 @@
 from django import forms
-from .models import Post, Category
+from .models import Post
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
-
-
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = Category
-        fields = ('name', 'name_en')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
 
 
 class PostForm(forms.ModelForm):
