@@ -145,13 +145,13 @@
                 class="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                {% for item in category_list %}
+                {% for item in category_list|slice:":8" %}
                   <li>
                     <a class="dropdown-item" href="{% url 'myapp:category_detail' item.name_en %}">{{ item.name }}</a>
                   </li>
                 {% endfor %}
-                <li>
-                  <a class="dropdown-item" href="{% url 'myapp:category_list' %}">全てのカテゴリ</a>
+                <li class="border-top">
+                  <a class="dropdown-item fw-bold" href="{% url 'myapp:category_list' %}">全てのカテゴリ</a>
                 </li>
               </ul>
             </li>

@@ -64,6 +64,10 @@
               {{ item.title }}
             </a>
           </li>
+               {% empty %}
+      <li>
+        このカテゴリに属する記事は投稿されていません。
+      </li>
         {% endfor %}
       </ul>
       <div class="d-flex align-items-center justify-content-center m-3">
