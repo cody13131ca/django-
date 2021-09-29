@@ -70,7 +70,7 @@ class PostDetail(DetailView):
         category_posts = Post.objects.filter(
             category=detail_data.category).order_by('-created_at')
         related_items = self.object.tags.similar_objects()
-        
+
         params = {
             'object': detail_data,
             'category_posts': category_posts,
@@ -202,7 +202,7 @@ class TagDetail(DetailView):
     def get_context_data(self, *args, **kwargs):
         tag_lists = Tag.objects.all().annotate(blog_count=Count(
             'taggit_taggeditem_items')).order_by('-blog_count')
-        
+
         params = {
             'tag_lists': tag_lists
         }
@@ -215,12 +215,11 @@ def Search(request):
 
         if searchform.is_valid():
             freeword = searchform.cleaned_data['freeword']
-            search_list = Post.objects.filter(
-                Q(
-                    title__icontains=freeword) | Q(
-                    content__icontains=freeword) | Q(
-                    author__username__icontains=freeword) | Q(
-                    category__name__icontains=freeword) | Q(tags__name__icontains=freeword))
+            search_list = Post.objects.filter(Q(title__icontains=freeword) | Q(
+                content__icontains=freeword) | Q(
+                author__username__icontains=freeword) | Q(
+                    category__name__icontains=freeword) | Q(
+                        tags__name__icontains=freeword)).distinct()
 
         params = {
             'search_list': search_list,
