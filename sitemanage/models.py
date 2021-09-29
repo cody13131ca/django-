@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.sites.models import Site
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class SiteConfig(models.Model):
@@ -9,7 +10,7 @@ class SiteConfig(models.Model):
     meta_keywords = models.CharField('SEOキーワード', max_length=300)
     author = models.CharField('管理者', max_length=30)
     top_title = models.CharField('TOPページタイトル', max_length=100)
-    top_subtitle = models.CharField('TOPページサブタイトル', max_length=200)
+    top_subtitle = RichTextUploadingField('TOPページサブタイトル', max_length=200)
     mail = models.EmailField()
 
     def __str__(self):
