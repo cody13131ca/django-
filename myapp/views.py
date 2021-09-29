@@ -220,7 +220,7 @@ def Search(request):
                     title__icontains=freeword) | Q(
                     content__icontains=freeword) | Q(
                     author__username__icontains=freeword) | Q(
-                    category__name__icontains=freeword))
+                    category__name__icontains=freeword) | Q(tags__name__icontains=freeword))
 
         params = {
             'search_list': search_list,
