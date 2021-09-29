@@ -2,7 +2,53 @@
 <div class="row">
   <div class="col-md-12">
     <h2 class="blog">Post一覧</h2>
-    <div class="table-responsive">
+    {% for item in post_list %}
+    <div class="card mb-3 mx-auto" style="max-width: 1200px">
+      <div class="row no-gutters">
+        <div class="col-md-4 mx-auto" style=" height: 200px;">
+          <a href="{% url 'myapp:post_detail' item.id %}">
+            {% if item.thumbnail %}
+            <img
+              src="{{ item.thumbnail.url }}"
+              class="card-img-top w-100 h-100"
+              alt="{{ item.title }}"
+              style="object-fit: cover"
+            />
+            {% else %}
+            <img
+              src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
+              class="card-img-top w-100 h-100"
+              alt="{{ item.title }}"
+              style="object-fit: cover"
+            />
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+          <h4>
+            <a
+                href="{% url 'myapp:post_detail' item.pk %}"
+                class="text-body font-weight-bold card-title google"
+              >
+                {{ item.title }}
+              </a>
+            </h4>
+            <small class="my-1 d-block">投稿者：{{ item.author }}</small>
+            <p class="card-text">
+              {{ item.content |striptags| truncatechars:50 }}
+            </p>
+            <p class="card-text">
+              <small class="text-muted">{{ item.updated_at | date:"Y-m-j H:i:s" }}更新</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>検索結果にあう投稿はありません。</p>
+    {% endfor %}
+    {% comment %} <div class="table-responsive">
       <table class="table mb-3">
         <thead>
           <tr>
@@ -34,7 +80,7 @@
           {% endfor %}
         </tbody>
       </table>
-    </div>
+    </div> {% endcomment %}
     {% include 'myapp/pagination.html' %}
   </div>
 </div>

@@ -2,14 +2,14 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">{{ request.site.siteconfig.top_title }}</h1>
-    <p class="lead">{{ request.site.siteconfig.top_subtitle }}</p>
+    <p class="lead fs-7">{{ request.site.siteconfig.top_subtitle }}</p>
   </div>
 </div>
 <div class="d-flex w-100 justify-content-end m-2">
-  <i class="fas fa-sort-amount-down p-1">
+  <i class="fas fa-sort-amount-down p-1" style="font-size: .8em;">
     <a href="{% url 'myapp:index' %}">新しい投稿を表示</a>
   </i>
-  <i class="fas fa-sort-amount-down p-1">
+  <i class="fas fa-sort-amount-down p-1" style="font-size: .8em;">
     <a href="{% url 'myapp:indexlike' %}">人気の投稿を表示</a>
   </i>
 </div>
@@ -38,7 +38,11 @@
         </a>
       </div>
       <div class="card-body">
-        <h4 class="card-title">{{ item.title }}</h4>
+        <h4 class="card-title">
+          <a href="{% url 'myapp:post_detail' item.id %}">
+            {{ item.title }}
+          </a>
+        </h4>
         <div class="d-flex justify-content-center">
           <a href="{% url 'myapp:like_add' item.pk %}" style="margin: 0 0.25em">
             Like:<i class="far fa-thumbs-up" style="padding: 0 0.5em"></i>

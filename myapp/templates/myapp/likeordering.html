@@ -37,7 +37,10 @@
       
       </div>
       <div class="card-body">
-        <h4 class="card-title">{{ item.title }}
+        <h4 class="card-title">
+          <a href="{% url 'myapp:post_detail' item.id %}">
+            {{ item.title }}
+          </a>
         </h4>
         <div class="d-flex justify-content-center">
           <a href="{% url 'myapp:like_add' item.pk %}" style="margin: 0 .25em">
