@@ -51,15 +51,20 @@ CKEDITOR_CONFIGS = {
             ['Link', 'Unlink', 'Anchor'],
             ['Image', 'Flash', 'Table', 'HorizontalRule'],
             ['TextColor', 'BGColor'],
-            ['Smiley', 'SpecialChar'], ['Source'],
+            ['SpecialChar'], ['Source'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['NumberedList', 'BulletedList'],
-            ['Indent', 'Outdent'],
+            ['Indent', 'Outdent', 'Mathjax'],
             ['Maximize'],
         ],
-        'extraPlugins': 'justify,liststyle,indent',
+        'extraPlugins': 'justify,liststyle,indent,mathjax,codesnippet',
         'height': "70vh",
         'width': "100%",
+        # Class used inside span to render mathematical formulae using latex
+        'mathJaxClass': 'mathjax-latex',
+
+        # Mathjax library link to be used to render mathematical formulae
+        'mathJaxLib': 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_SVG',
     },
 }
 
