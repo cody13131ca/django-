@@ -8,7 +8,7 @@
       <div class="col">
         <div class="card h-100">
           <div style="width: 100%; height:250px;">
-          <a href="{% url 'myapp:category_detail' item.id %}">
+          <a href="{% url 'myapp:post_detail' item.id %}">
             {% if item.thumbnail %}
               <img
                 src="{{ item.thumbnail.url }}"
