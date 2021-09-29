@@ -40,8 +40,10 @@ class Indexlike(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         post_list = Post.objects.all().order_by('-like')
+        # tag_list = Post.tags.objects.all().annotate(c=Count('taggit_taggeditem_items')).order_by('-c')
         context = {
             'post_list': post_list,
+            # 'tag_list': tag_list,
         }
         return context
 
