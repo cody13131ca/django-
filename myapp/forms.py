@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'content', 'category', 'thumbnail')
+        fields = ('title', 'content', 'category', 'tags', 'thumbnail')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

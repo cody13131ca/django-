@@ -63,13 +63,13 @@
         </p>
         <div>
           タグ：
-          <ul>
+          <ul class="px-0">
             {% for tag in item.tags.all %}
               <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
             {% endfor %}   
+          </ul>
         </div>
 
-        </ul>
         </p>
         <p class="card-text">{{ item.content |striptags| truncatechars:50 }}</p>
       </div>

@@ -14,20 +14,19 @@
             </h5>
           </a>
           <small style="margin-left: 1em;">件数：[&nbsp;{{ category.post_count }}&nbsp;]</small>
-          <ul>
-            {% for post in category.post_set.all|slice:":10" %}
-            <li>
-              <a href="{% url 'myapp:post_detail' post.id %}"  class="pt-1 pb-1 m-3 fs-10  d-block card-text">
+          <ul class="list-group list-group-flush">
+            {% for post in category.post_set.all|slice:":5" %}
+            <li class="list-group-item">
+              <a href="{% url 'myapp:post_detail' post.id %}"  class="fs-10  d-block card-text">
                 {{ post.title }}
               </a>
             </li>
             {% empty %}
-              <li>
-                <p>このカテゴリに属する記事は投稿されていません。</p>
-              </li>
+              <p>このカテゴリに属する記事は投稿されていません。</p>
             {% endfor %}
           </ul>
-          <a href="{% url 'myapp:category_detail' category.name_en %}">→このカテゴリーの記事を全て見る</a>
+          <hr>
+          <a href="{% url 'myapp:category_detail' category.name_en %}" class="mt-2">→このカテゴリーの記事を全て見る</a>
         </div>
       </div>
     </div>

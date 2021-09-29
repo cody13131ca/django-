@@ -67,10 +67,12 @@ class PostDetail(DetailView):
         detail_data = Post.objects.get(id=self.kwargs['pk'])
         category_posts = Post.objects.filter(
             category=detail_data.category).order_by('-created_at')
+        related_items = self.object.tags.similar_objects()
         
         params = {
             'object': detail_data,
             'category_posts': category_posts,
+            'related_items': related_items,
         }
         return params
 

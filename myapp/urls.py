@@ -10,11 +10,20 @@ urlpatterns = [
     # トップページのリンク(いいねの多い順)
     path('post_create', views.PostCreate.as_view(), name='post_create'),
     # 新規投稿ページのリンク
-    path('post_detail/<int:pk>', views.PostDetail.as_view(), name='post_detail'),
+    path(
+        'post_detail/<int:pk>',
+        views.PostDetail.as_view(),
+        name='post_detail'),
     # 詳細画面表示
-    path('post_update/<int:pk>', views.PostUpdate.as_view(), name='post_update'),
+    path(
+        'post_update/<int:pk>',
+        views.PostUpdate.as_view(),
+        name='post_update'),
     # 更新画面表示
-    path('post_delete/<int:pk>', views.PostDelete.as_view(), name='post_delete'),
+    path(
+        'post_delete/<int:pk>',
+        views.PostDelete.as_view(),
+        name='post_delete'),
     # 削除画面
     path('post_list', views.PostList.as_view(), name='post_list'),
     # リスト画面
@@ -35,5 +44,6 @@ urlpatterns = [
     # カテゴリー
     path('search', views.Search, name='search'),
     # 検索
-    
+
+
 ]
