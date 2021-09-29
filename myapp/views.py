@@ -93,7 +93,7 @@ class PostDelete(OnlyMyPostMixin, DeleteView):
 
 
 class PostList(ListView):
-    paginate_by = 5
+    paginate_by = 10
     model = Post
 
     def get_queryset(self):
