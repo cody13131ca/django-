@@ -11,6 +11,8 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from taggit.models import Tag
+from django.db.models import Count
 # from django.core.paginator import Paginator
 
 
@@ -40,11 +42,8 @@ class Indexlike(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         post_list = Post.objects.all().order_by('-like')
-        # tag_list = Post.tags.objects.all().annotate(c=Count('taggit_taggeditem_items')).order_by('-c')
         context = {
             'post_list': post_list,
-            # 'tag_list': tag_list,
-            
         }
         return context
 
@@ -190,6 +189,23 @@ class CategoryDetail(DetailView):
             'category_posts': category_posts,
         }
 
+        return params
+
+
+class TagList(ListView):
+    model = Tag
+
+
+class TagDetail(DetailView):
+    model = Tag
+
+    def get_context_data(self, *args, **kwargs):
+        tag_lists = Tag.objects.all().annotate(blog_count=Count(
+            'taggit_taggeditem_items')).order_by('-blog_count')
+        
+        params = {
+            'tag_lists': tag_lists
+        }
         return params
 
 

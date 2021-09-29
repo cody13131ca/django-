@@ -29,7 +29,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     tags = TaggableManager(blank=True)
-
+    
     def like_count(self):
         n = Like.objects.filter(post=self).count()
         return n

@@ -42,6 +42,8 @@ urlpatterns = [
         views.CategoryDetail.as_view(),
         name='category_detail'),
     # カテゴリー
+    path('tag_list', views.TagList.as_view(), name='tag_list'),
+    # タグ
     path('search', views.Search, name='search'),
     # 検索
 
