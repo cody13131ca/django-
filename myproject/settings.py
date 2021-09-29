@@ -49,7 +49,7 @@ CKEDITOR_CONFIGS = {
         'toolbar_Full': [
             ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Undo', 'Redo'],
             ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['Image', 'Table', 'HorizontalRule'],
             ['TextColor', 'BGColor'],
             ['SpecialChar', 'Mathjax'], ['Source'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
