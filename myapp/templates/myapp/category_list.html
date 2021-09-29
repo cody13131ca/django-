@@ -2,14 +2,14 @@
 {% block content %}
 <div class="row">
   <div class="mb-3">
-    <h2 class="mb-3">Category List</h2>
+    <h2 class="mb-3 blog">Category List</h2>
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
     {% for category in category_list %}
     <div class="col">
       <div class="card h-100">
         <div class="card-body">
           <a href="{% url 'myapp:category_detail' category.name_en %}"  class="card-title pt-3 fs-4 d-inline-block">
-            <h5>
+            <h5 class="blog">
               {{ category.name }}
             </h5>
           </a>

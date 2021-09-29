@@ -1,7 +1,7 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
 <div class="row">
-  <h2 class="mb-3">{{ object.name }}</h2>
+  <h2 class="mb-3 blog">{{ object.name }}</h2>
   <div class="col-md-9">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
     {% for item in category_posts %}
@@ -41,7 +41,7 @@
             </div>
             <hr>
             <p class="card-text">
-              {{ item.content |striptags| truncatechars:40 }}
+              {{ item.content |striptags| truncatechars:50 }}
             </p>
           </div>
           <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn">Read more</a>
@@ -56,9 +56,9 @@
   </div>
 
   <div class="col-md-3 d-flex flex-column p-3">
-      <h5>{{ object.name }}のタイトル一覧</h5>
+      <h5 class="blog">{{ object.name }}のタイトル一覧</h5>
       <ul class="list-group list-group-flush">
-        {% for item in category_posts %}
+        {% for item in category_posts|slice:":10" %}
           <li class="list-group-item" class="list-item">
             <a href="{% url 'myapp:post_detail' item.id %}">
               {{ item.title }}
