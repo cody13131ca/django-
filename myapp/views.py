@@ -44,6 +44,7 @@ class Indexlike(TemplateView):
         context = {
             'post_list': post_list,
             # 'tag_list': tag_list,
+            
         }
         return context
 
