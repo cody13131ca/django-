@@ -61,7 +61,16 @@
         <p class="fs-10 fw-normal">
           分類：{{ item.category }}
         </p>
+        <div>
+          タグ：
+          <ul>
+            {% for tag in item.tags.all %}
+              <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+            {% endfor %}   
+        </div>
 
+        </ul>
+        </p>
         <p class="card-text">{{ item.content |striptags| truncatechars:50 }}</p>
       </div>
       <a href="{% url 'myapp:post_detail' item.id %}" type="button" class="btn"

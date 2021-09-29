@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'myapp',
     'django.contrib.sites',
     'sitemanage',
-    'ckeditor',  # 追記
-    'ckeditor_uploader'
+    'ckeditor',
+    'ckeditor_uploader',
+    'taggit',
 ]
 
 CKEDITOR_CONFIGS = {

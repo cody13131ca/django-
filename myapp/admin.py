@@ -6,7 +6,13 @@ from .models import Post, Like, Category, DisLike
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'author', 'title', 'created_at', 'like_count')
+    list_display = (
+        'id',
+        'author',
+        'title',
+        'created_at',
+        'like_count',
+        'tags')
     list_display_links = ('title',)
     ordering = ('-created_at',)
 
