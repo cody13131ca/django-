@@ -52,6 +52,13 @@
         </div>
         <hr>
         <p class="fs-10 fw-normal">{{ item.category }}</p>
+        <div>
+          タグ：
+          <ul class="px-0">
+            {% for tag in item.tags.all %}
+              <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+            {% endfor %}   
+        </div>
         <p class="card-text">
           {{ item.content |striptags| truncatechars:50 }}
         </p>

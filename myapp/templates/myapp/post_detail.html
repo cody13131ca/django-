@@ -83,7 +83,7 @@
   </div>
 </div>
 <div class="col-md-3">
-  <div class="card">
+  <div class="card my-3">
     <div class="card-body">
       <h5 class="card-title mb-3 blog">{{ object.category }}</h5>
       <p class="fs-6">このカテゴリーの他の記事</p>
@@ -96,7 +96,24 @@
       </ul>
     </div>
     <div class="d-flex align-items-center justify-content-center m-3">
-        <a class="btn btn-outline-dark" href="{% url 'myapp:category_list' %}">全てのカテゴリを見る</a>
+        <a class="btn btn-outline-dark" href="{% url 'myapp:category_list' %}">全て表示</a>
+      </div>
+  </div>
+  <div class="card my-3">
+    <div class="card-body">
+      <h5 class="card-title mb-3 blog">関連記事</h5>
+      <ul class="list-group list-group-flush">
+        {% for item in related_items|slice:":10" %}
+        <li class="list-group-item">
+          <a href="{% url 'myapp:post_detail' item.id %}">{{ item.title }}</a>
+        </li>
+        {% empty %}
+        <p>関連記事はありません</p>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="d-flex align-items-center justify-content-center m-3">
+        <a class="btn btn-outline-dark" href="{% url 'myapp:category_list' %}">全て表示</a>
       </div>
   </div>
 </div>

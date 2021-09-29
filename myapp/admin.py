@@ -10,9 +10,10 @@ class PostAdmin(admin.ModelAdmin):
         'id',
         'author',
         'title',
+        'tags',
         'created_at',
         'like_count',
-        'tags')
+    )
     list_display_links = ('title',)
     ordering = ('-created_at',)
 
