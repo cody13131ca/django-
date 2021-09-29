@@ -84,11 +84,7 @@
 <div class="col-md-3">
   <div class="card">
     <div class="card-body">
-    {% for i in category_list %}
-    <a href="{% url 'myapp:category_detail' i.name_en %}">
-    {% endfor %}
       <h5 class="card-title mb-3">{{ object.category }}</h5>
-    </a>
       <p class="fs-6">このカテゴリーの他の記事</p>
       <ul class="list-group list-group-flush">
         {% for item in category_posts|slice:":10" %}
