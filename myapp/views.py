@@ -128,11 +128,12 @@ def Like_add(request, post_id):
 
     is_liked = Like.objects.filter(user=request.user, post=post_id).count()
     like = Like()
+    url = request.META.get('HTTP_REFERER')
 
     if is_liked > 0:
         messages.info(request, 'いいねを取り消しました。')
         Like.objects.filter(user=request.user, post=post_id).delete()
-        return redirect('myapp:index')
+        return redirect(url)
 
     else:
         like.user = request.user
@@ -140,7 +141,7 @@ def Like_add(request, post_id):
         like.save()
 
         messages.success(request, '投稿にいいねしました！')
-        return redirect('myapp:index')
+        return redirect(url)
 
 
 @login_required
@@ -149,11 +150,12 @@ def DisLike_add(request, post_id):
     dislike = DisLike()
     is_disliked = DisLike.objects.filter(
         user=request.user, post=post_id).count()
+    url = request.META.get('HTTP_REFERER')
 
     if is_disliked > 0:
         messages.info(request, 'よくないねを取り消しました。')
         DisLike.objects.filter(user=request.user, post=post_id).delete()
-        return redirect('myapp:index')
+        return redirect(url)
 
     else:
         dislike.user = request.user
@@ -161,7 +163,7 @@ def DisLike_add(request, post_id):
         dislike.save()
 
         messages.warning(request, 'よくないねしました。')
-        return redirect('myapp:index')
+        return redirect(url)
 
 
 class CategoryList(ListView):
