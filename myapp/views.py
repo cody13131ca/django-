@@ -23,7 +23,6 @@ class OnlyMyPostMixin(UserPassesTestMixin):
 
 
 class Index(TemplateView):
-    # paginate_by = 10
     template_name = 'myapp/index.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -36,7 +35,6 @@ class Index(TemplateView):
 
 
 class Indexlike(TemplateView):
-    # paginate_by = 10
     template_name = 'myapp/index.html'
 
     def get_context_data(self, *args, **kwargs):
