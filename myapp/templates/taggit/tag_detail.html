@@ -1,7 +1,7 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
 <div class="row">
-  <h2 class="mb-3 blog">{{ tag.name }}タグに属する記事一覧</h2>
+  <h2 class="mb-3 blog">{{ tag.name }}の記事一覧</h2>
   <div class="col-md-9">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
     {% for item in tag_posts %}

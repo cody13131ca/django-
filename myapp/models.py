@@ -8,7 +8,7 @@ from taggit.managers import TaggableManager
 
 class Category(models.Model):
     name = models.CharField('カテゴリ名', max_length=50)
-    name_en = models.CharField('カテゴリ名英語', max_length=10)
+    name_en = models.CharField('カテゴリ名英語', max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
