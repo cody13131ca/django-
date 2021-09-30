@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('myapp.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('tags/', include('taggit_templatetags2.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 追記
 
 if settings.DEBUG:
