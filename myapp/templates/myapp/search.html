@@ -40,7 +40,9 @@
             <ul class="p-0 m-0">
             タグ：
             {% for tag in item.tags.all %}
-              <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+              <a href="{% url 'myapp:tag_detail' tag %}">
+                <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+              </a>
             {% endfor %}   
           </ul>
             <small class="my-1 d-block">投稿者：{{ item.author }}</small>
