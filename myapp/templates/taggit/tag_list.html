@@ -3,12 +3,15 @@
   <h2 class="mb-3 blog">Tag List</h2>
   <ul class="px-0">
     {% for item in tag_list %}
-      <li
-        class="btn btn-success btn-rounded-3 p-2 mx-1 m-2"
-        style="font-size: 1em"
-      >
+      
+      <a href="{% url 'myapp:tag_detail' item %}" style="color: #fff;">
+        <li
+          class="btn btn-success btn-rounded-3 p-2 mx-1 m-2"
+          style="font-size: 1em"
+        >
         {{ item }}
       </li>
+      </a>
     {% endfor %}
   </ul>
 </div>

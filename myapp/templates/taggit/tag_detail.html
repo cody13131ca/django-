@@ -1,10 +1,10 @@
 {% extends 'myapp/base.html' %}
 {% block content %}
 <div class="row">
-  <h2 class="mb-3 blog">{{ object.name }}</h2>
+  <h2 class="mb-3 blog">{{ tag.name }}タグに属する記事一覧</h2>
   <div class="col-md-9">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
-    {% for item in category_posts %}
+    {% for item in tag_posts %}
       <div class="col">
         <div class="card h-100">
           <div style="width: 100%; height:250px;">
@@ -40,6 +40,19 @@
               </a>
             </div>
             <hr>
+            <p class="fs-10 fw-normal">
+              分類：{{ item.category }}
+            </p>
+            <div>
+              タグ：
+              <ul class="px-0">
+                {% for tag in item.tags.all %}
+                <a href="{% url 'myapp:tag_detail' tag %}">
+                  <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+                </a>
+                {% endfor %}   
+              </ul>
+            </div>
             <p class="card-text">
               {{ item.content |striptags| truncatechars:50 }}
             </p>
@@ -56,22 +69,22 @@
   </div>
 
   <div class="col-md-3 d-flex flex-column p-3">
-      <h5 class="blog">{{ object.name }}のタイトル一覧</h5>
+      <h5 class="blog">{{ tag.name }}のタイトル一覧</h5>
       <ul class="list-group list-group-flush">
-        {% for item in category_posts %}
+        {% for item in tag_posts %}
           <li class="list-group-item" class="list-item">
             <a href="{% url 'myapp:post_detail' item.id %}">
               {{ item.title }}
             </a>
           </li>
                {% empty %}
-      <li>
-        このカテゴリに属する記事は投稿されていません。
-      </li>
+      <p>
+        このタグに属する記事は投稿されていません。
+      </p>
         {% endfor %}
       </ul>
       <div class="d-flex align-items-center justify-content-center m-3">
-        <a class="btn btn-outline-dark" href="{% url 'myapp:category_list' %}">他のカテゴリ</a>
+        <a class="btn btn-outline-dark" href="{% url 'myapp:tag_list' %}">他のタグ</a>
       </div>
     </div>
   </div>

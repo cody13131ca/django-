@@ -56,7 +56,9 @@
           タグ：
           <ul class="px-0">
             {% for tag in item.tags.all %}
-              <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+              <a href="{% url 'myapp:tag_detail' tag %}">
+                <li class="btn btn-success btn-rounded-3 px-1 py-1" style="font-size: .5em;">{{ tag }}</li>
+              </a>
             {% endfor %}   
         </div>
         <p class="card-text">

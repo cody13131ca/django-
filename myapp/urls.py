@@ -43,6 +43,10 @@ urlpatterns = [
         name='category_detail'),
     # カテゴリー
     path('tag_list', views.TagList.as_view(), name='tag_list'),
+    path(
+        'tag_detail/<str:name>',
+        views.TagDetail.as_view(),
+        name='tag_detail'),
     # タグ
     path('search', views.Search, name='search'),
     # 検索

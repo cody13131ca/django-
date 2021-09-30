@@ -198,13 +198,19 @@ class TagList(ListView):
 
 class TagDetail(DetailView):
     model = Tag
+    slug_field = 'name'
+    slug_url_kwarg = 'name'
 
     def get_context_data(self, *args, **kwargs):
         tag_lists = Tag.objects.all().annotate(blog_count=Count(
             'taggit_taggeditem_items')).order_by('-blog_count')
+        tag = Tag.objects.get(name=self.kwargs['name'])
+        tag_posts = Post.objects.filter(tags=tag)
 
         params = {
-            'tag_lists': tag_lists
+            'tag': tag,
+            'tag_lists': tag_lists,
+            'tag_posts': tag_posts,
         }
         return params
 
