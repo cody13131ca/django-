@@ -16,6 +16,8 @@
 
 <div class="row row-cols-1 row-cols-lg-3 row-cols-xl-4 g-4">
   {% for item in post_list %}
+  
+  {% comment %} {% if request.user == item.author %} {% endcomment %}
   <div class="col">
     <div class="card h-100">
       <div style="width: 100%; height: 250px">
@@ -91,6 +93,9 @@
       </div>
     </div>
   </div>
+  {% comment %} {% endif %} {% endcomment %}
+  
+
   {% endfor %}
 </div>
 

@@ -116,8 +116,13 @@
               >
                 {% if request.user.is_authenticated %}
                   <li>
-                    <a class="dropdown-item" href="">{{ request.user }}</a>
+                    <a class="dropdown-item" href="{% url 'myapp:mypage' %}">{{ request.user }}</a>
                   </li>
+                  {% comment %} {% for item in post_list %}
+                    {% if request.user == item.author %}
+                    アイウエオ
+                    {% endif %}
+                  {% endfor %} {% endcomment %}
                   <li>
                     <a class="dropdown-item" href="{% url 'myapp:logout' %}">ログアウト</a>
                   </li>

@@ -8,6 +8,8 @@ urlpatterns = [
     # トップページのリンク
     path('likeordering', views.Indexlike.as_view(), name='indexlike'),
     # トップページのリンク(いいねの多い順)
+    path('mypage', views.Mypage.as_view(), name='mypage'),
+    # マイページのリンク
     path('post_create', views.PostCreate.as_view(), name='post_create'),
     # 新規投稿ページのリンク
     path(
